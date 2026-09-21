@@ -44,9 +44,9 @@ print(GlowStreamer.mro())
 print(ViralCyborg.mro())
 print(DonateMage.mro())
 
-print(glow.live())
-print(viral.live())
-print(donate.live())
+print(glow.live()) #здесь отрабатывает класс GlowStreamer который объединяет в себе классы Streamer и Mutant. Сначало срабатывает класс Streamer а затем класс Mutant
+print(viral.live())#здесь срабатывает класс ViralCyborg в котором есть классы Tiktoker и Mutant. Как и в первом случаи срабатывает тот класс который в порядке стоит первым
+print(donate.live())#здесь же срабатывает класс DonateMage который объединяет классы Streamer и Tiktoker. Тут сначало срабатывает класс Streamer а потом класс Tiktoker
 
 print(glow.ultimate_content())
 print(viral.ultimate_content())
