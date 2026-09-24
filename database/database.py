@@ -1,11 +1,12 @@
 import sqlite3
 
-connection = sqlite3.connect("database.db")
+connection = sqlite3.connect("library.db")
 
 
 def create_table():
     connection.execute("""
         CREATE TABLE IF NOT EXISTS books (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             author TEXT,
             publication_year INTEGER,
@@ -14,6 +15,22 @@ def create_table():
             number_of_copies INTEGER
         )
     """)
+    connection.commit()
+
+def get_books_by_author(author):
+    result = connection.execute("""
+        SELECT * FROM books
+        WHERE author = ?
+    """, (author,))
+
+    return result.fetchall()
+
+
+def delete_book_by_id(id):
+    connection.execute("""
+        DELETE FROM books
+        WHERE id = ?
+    """, (id,))
     connection.commit()
 
 
@@ -46,4 +63,8 @@ if __name__ == "__main__":
     insert_books("Алиса в Стране чудес", "Льюис Кэрролл", 1865, "Сказка", 192, 3)
     insert_books("Дюна", "Фрэнк Герберт", 1965, "Фантастика", 688, 2)
 
+
+    get_books_by_author("Лев Толстой")
+    delete_book_by_id(2)
     connection.close()
+
